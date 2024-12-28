@@ -22,3 +22,4 @@ class TransactionManager:
 
     def addTransaction(self, transaction, fileHandler):
         fileHandler.writeTransaction(transaction)
+        fileHandler.addTransactionToList(transaction)

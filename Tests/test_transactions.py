@@ -24,8 +24,8 @@ def test_writeTransaction():
     date = datetime.now()
     transaction = Transaction(category, type, amount, description)
     tm.addTransaction(transaction, fh)
-    assert fh.readRecentTransaction() == ({"category": transaction.category,
-                              "type": transaction.type,
-                              "description": transaction.description,
-                              "amount": str(transaction.amount),
-                              "date": transaction.date.isoformat(timespec="seconds")})
+    assert fh.readRecentTransaction() == ({"_category": transaction.category,
+                              "_type": transaction.type,
+                              "_description": transaction.description,
+                              "_amount": transaction.amount,
+                              "_date": transaction.date})
