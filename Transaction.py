@@ -10,7 +10,7 @@ class Transaction:
         self.date = datetime.datetime
 
     def __str__(self):
-        return f"{self.date} {self.category} {self.type} — ${self.amount}, {self.description}"
+        return f"{self.date.isoformat()} {self.category} {self.type} — ${self.amount}, {self.description}"
 
     @property
     def category(self):
