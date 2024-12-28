@@ -13,6 +13,14 @@ class Transaction:
         return f"{self.date.isoformat(timespec="seconds")} {self.category} {self.type} — ${self.amount}, {self.description}"
 
     @property
+    def date(self):
+        return self._date
+    
+    @date.setter
+    def date(self, date):
+        self._date = date
+
+    @property
     def category(self):
         return self._category
     
