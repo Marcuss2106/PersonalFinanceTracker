@@ -1,4 +1,4 @@
-import datetime
+from datetime import datetime
 from decimal import Decimal
 
 class Transaction:
@@ -7,10 +7,10 @@ class Transaction:
         self.type = type # income or expense
         self.amount = amount
         self.description = description
-        self.date = datetime.datetime
+        self.date = datetime.now()
 
     def __str__(self):
-        return f"{self.date.isoformat()} {self.category} {self.type} — ${self.amount}, {self.description}"
+        return f"{self.date.isoformat(timespec="seconds")} {self.category} {self.type} — ${self.amount}, {self.description}"
 
     @property
     def category(self):
