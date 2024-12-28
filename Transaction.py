@@ -41,5 +41,5 @@ class Transaction:
         return self._description
     
     @description.setter
-    def type(self, description):
+    def description(self, description):
         self._description = description
