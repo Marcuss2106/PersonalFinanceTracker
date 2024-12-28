@@ -2,7 +2,7 @@ from decimal import Decimal
 
 class TransactionManager:
     def __init__(self):
-        ...
+        self.transactions = []
 
     def addTransactionCategory(self):
         category = input("Category")
@@ -23,3 +23,9 @@ class TransactionManager:
     def addTransaction(self, transaction, fileHandler):
         fileHandler.writeTransaction(transaction)
         fileHandler.addTransactionToList(transaction)
+        self.addTransactionToList(transaction)
+
+    def addTransactionToList(self, transaction):
+        self.transactions.append(vars(transaction))
+
+    

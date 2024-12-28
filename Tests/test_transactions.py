@@ -17,7 +17,7 @@ def test_createTransaction():
     transaction = Transaction(category, type, amount, description)
     assert str(transaction) == f"{date.isoformat(timespec="seconds")} Groceries Expense — $13.12, Apples"
 
-def test_writeTransaction():
+def test_writeAndReadTransaction():
     transaction = Transaction(category, type, amount, description)
     tm.addTransaction(transaction, fh)
     assert fh.readRecentTransaction() == ({"_category": transaction.category,

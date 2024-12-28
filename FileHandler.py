@@ -1,19 +1,20 @@
 import csv
 import datetime
 from decimal import Decimal
+from TransactionManager import TransactionManager
 
 class FileHandler:
-    def __init__(self):
+    def __init__(self, transactionManager):
         self.FIELDNAMES = ["category","type","description","amount","date"]
         self.TRANSACTIONFILE  = "transactions.csv"
-        self.transactions = []
+        self.transactionManager = TransactionManager()
         with open(self.TRANSACTIONFILE) as transactionFile:
             reader = csv.DictReader(transactionFile)
             if reader:
                 for row in reader:
                     row["amount"] = Decimal(row["amount"])
                     row["date"] = datetime.datetime.fromisoformat(row["date"])
-                    self.transactions.append(row)
+                    self.transactionManager.append(row)
 
     def writeTransaction(self, transaction):
         with open(self.TRANSACTIONFILE,'a', newline='') as transactionFile:
@@ -23,9 +24,6 @@ class FileHandler:
                               "description": transaction.description,
                               "amount": str(transaction.amount),
                               "date": transaction.date.isoformat(timespec="seconds")})
-        
-    def addTransactionToList(self, transaction):
-        self.transactions.append(vars(transaction))
-            
+                 
     def readRecentTransaction(self):
-        return self.transactions[-1]
+        return self.transactionManager.transactions[-1]
