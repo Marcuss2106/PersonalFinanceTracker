@@ -8,8 +8,8 @@ from random import choice, randint
 tm = TransactionManager()
 fh = FileHandler(tm)
 
-category = ["Groceries", "Rent", "Bill"]
-type = ["Expense","Income"]
+categories = ["Groceries", "Rent", "Bill"]
+types = ["Expense","Income"]
 AMTSTART = 1
 AMTEND = 100
 description = "_"
@@ -18,12 +18,12 @@ NUMBER_TRANSACTIONS = 10
 
 def test_createTransaction():
     for i in range(NUMBER_TRANSACTIONS):
-        transaction = Transaction(choice(category), choice(type), randint(AMTSTART, AMTEND), description)
+        transaction = Transaction(choice(categories), choice(types), randint(AMTSTART, AMTEND), description)
         assert str(transaction) == f"{date.isoformat(timespec="seconds")} {transaction.category} {transaction.type} — ${transaction.amount}, {transaction.description}"
 
 def test_writeAndReadTransaction():
     for i in range(NUMBER_TRANSACTIONS):
-        transaction = Transaction(choice(category), choice(type), randint(AMTSTART, AMTEND), description)
+        transaction = Transaction(choice(categories), choice(types), randint(AMTSTART, AMTEND), description)
         tm.addTransactionToFile(transaction, fh)
         tm.addTransactionToList(transaction)
         assert fh.readRecentTransaction() == ({"_category": transaction.category,
@@ -43,3 +43,8 @@ def test_filterExpenses():
 def test_filterIncome():
     for transaction in tm.filterIncomes():
         assert transaction["_type"] == "Income"
+
+def test_filterByCategory():
+    for category in categories:
+        for transaction in tm.filterByCategory(category):
+            assert transaction["_category"] == category
