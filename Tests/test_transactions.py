@@ -12,7 +12,7 @@ category = ["Groceries", "Rent", "Bill"]
 type = ["Expense","Income"]
 AMTSTART = 1
 AMTEND = 100
-description = ""
+description = "_"
 date = datetime.now()
 NUMBER_TRANSACTIONS = 5
 
