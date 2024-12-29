@@ -36,5 +36,5 @@ class TransactionManager:
         return filter(lambda transaction: transaction["_type"] == "Income", self.transactions)
     
     def filterByCategory(self, category):
-        return filter(lambda transaction: transaction["_type"] == category, self.transactions)
+        return filter(lambda transaction: transaction["_category"] == category, self.transactions)
     
