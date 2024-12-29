@@ -3,25 +3,27 @@ from TransactionManager import TransactionManager
 from Transaction import Transaction
 from decimal import Decimal
 from datetime import datetime
+from random import choice, randint
 
 tm = TransactionManager()
 fh = FileHandler(tm)
 
-category = "Groceries"
-type = "Expense"
-amount = Decimal("13.12")
-description = "Apples"
+category = ["Groceries", "Rent", "Bill"]
+type = ["Expense","Income"]
+AMTSTART = 1
+AMTEND = 100
+description = ""
 date = datetime.now()
 NUMBER_TRANSACTIONS = 5
 
 def test_createTransaction():
     for i in range(NUMBER_TRANSACTIONS):
-        transaction = Transaction(category, type, amount, description)
-        assert str(transaction) == f"{date.isoformat(timespec="seconds")} Groceries Expense — $13.12, Apples"
+        transaction = Transaction(choice(category), choice(type), randint(AMTSTART, AMTEND), description)
+        assert str(transaction) == f"{date.isoformat(timespec="seconds")} {transaction.category} {transaction.type} — ${transaction.amount}, {transaction.description}"
 
 def test_writeAndReadTransaction():
     for i in range(NUMBER_TRANSACTIONS):
-        transaction = Transaction(category, type, amount, description)
+        transaction = Transaction(choice(category), choice(type), randint(AMTSTART, AMTEND), description)
         tm.addTransactionToFile(transaction, fh)
         tm.addTransactionToList(transaction)
         assert fh.readRecentTransaction() == ({"_category": transaction.category,
