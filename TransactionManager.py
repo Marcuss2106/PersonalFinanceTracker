@@ -29,12 +29,15 @@ class TransactionManager:
         else:
             self.transactions.append(vars(transaction))
 
-    def filterExpenses(self):
-        return filter(lambda transaction: transaction["_type"] == "Expense", self.transactions)
+    def filterExpenses(self, transactions):
+        return filter(lambda transaction: transaction["_type"] == "Expense", transactions)
     
-    def filterIncomes(self):
-        return filter(lambda transaction: transaction["_type"] == "Income", self.transactions)
+    def filterIncomes(self, transactions):
+        return filter(lambda transaction: transaction["_type"] == "Income", transactions)
     
-    def filterByCategory(self, category):
-        return filter(lambda transaction: transaction["_category"] == category, self.transactions)
+    def filterByCategory(self, category, transactions):
+        return filter(lambda transaction: transaction["_category"] == category, transactions)
+    
+    def sortByAmountDescending(self, transactions):
+        return sorted(transactions, key=lambda transaction: Decimal(transaction["_amount"]))
     
