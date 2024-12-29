@@ -29,7 +29,9 @@ class TransactionManager:
         else:
             self.transactions.append(vars(transaction))
 
-    def showExpenses(self):
-        ...
-
+    def filterExpenses(self):
+        return filter(lambda transaction: transaction["_type"] == "Expense", self.transactions)
+    
+    def filterIncomes(self):
+        return filter(lambda transaction: transaction["_type"] == "Income", self.transactions)
     
