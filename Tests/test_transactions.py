@@ -14,7 +14,7 @@ AMTSTART = 1
 AMTEND = 100
 description = "_"
 date = datetime.now()
-NUMBER_TRANSACTIONS = 5
+NUMBER_TRANSACTIONS = 10
 
 def test_createTransaction():
     for i in range(NUMBER_TRANSACTIONS):
@@ -35,3 +35,11 @@ def test_writeAndReadTransaction():
 
 def test_numberTransactions():
     assert len(tm.transactions) == NUMBER_TRANSACTIONS
+
+def test_filterExpenses():
+    for transaction in tm.filterExpenses():
+        assert transaction["_type"] == "Expense"
+
+def test_filterIncome():
+    for transaction in tm.filterIncomes():
+        assert transaction["_type"] == "Income"

@@ -1,2 +1,11 @@
 category,type,description,amount,date
-Groceries,Expense,Apples,13.12,2024-12-28T15:48:58
+Groceries,Income,_,20,2024-12-29T14:43:00
+Bill,Income,_,70,2024-12-29T14:43:00
+Bill,Income,_,39,2024-12-29T14:43:00
+Bill,Income,_,46,2024-12-29T14:43:00
+Groceries,Expense,_,80,2024-12-29T14:43:00
+Rent,Expense,_,36,2024-12-29T14:43:00
+Bill,Income,_,5,2024-12-29T14:43:00
+Rent,Income,_,80,2024-12-29T14:43:00
+Bill,Expense,_,32,2024-12-29T14:43:00
+Groceries,Expense,_,12,2024-12-29T14:43:00
