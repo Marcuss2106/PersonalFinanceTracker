@@ -20,12 +20,13 @@ class TransactionManager:
         description = input("Description")
         return description
 
-    def addTransaction(self, transaction, fileHandler):
+    def addTransactionToFile(self, transaction, fileHandler):
         fileHandler.writeTransaction(transaction)
-        fileHandler.addTransactionToList(transaction)
-        self.addTransactionToList(transaction)
 
     def addTransactionToList(self, transaction):
-        self.transactions.append(vars(transaction))
+        if type(transaction) == dict:
+            self.transactions.append(transaction)
+        else:
+            self.transactions.append(vars(transaction))
 
     

@@ -5,7 +5,7 @@ from decimal import Decimal
 from datetime import datetime
 
 tm = TransactionManager()
-fh = FileHandler()
+fh = FileHandler(tm)
 
 category = "Groceries"
 type = "Expense"
@@ -19,9 +19,11 @@ def test_createTransaction():
 
 def test_writeAndReadTransaction():
     transaction = Transaction(category, type, amount, description)
-    tm.addTransaction(transaction, fh)
+    tm.addTransactionToFile(transaction, fh)
+    tm.addTransactionToList(transaction)
     assert fh.readRecentTransaction() == ({"_category": transaction.category,
                               "_type": transaction.type,
                               "_description": transaction.description,
                               "_amount": transaction.amount,
                               "_date": transaction.date})
+    assert fh.readRecentTransaction() == tm.transactions[-1]

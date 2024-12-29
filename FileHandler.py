@@ -7,14 +7,14 @@ class FileHandler:
     def __init__(self, transactionManager):
         self.FIELDNAMES = ["category","type","description","amount","date"]
         self.TRANSACTIONFILE  = "transactions.csv"
-        self.transactionManager = TransactionManager()
+        self.tm = transactionManager
         with open(self.TRANSACTIONFILE) as transactionFile:
             reader = csv.DictReader(transactionFile)
             if reader:
                 for row in reader:
                     row["amount"] = Decimal(row["amount"])
                     row["date"] = datetime.datetime.fromisoformat(row["date"])
-                    self.transactionManager.append(row)
+                    self.tm.addTransactionToList(row)
 
     def writeTransaction(self, transaction):
         with open(self.TRANSACTIONFILE,'a', newline='') as transactionFile:
@@ -26,4 +26,4 @@ class FileHandler:
                               "date": transaction.date.isoformat(timespec="seconds")})
                  
     def readRecentTransaction(self):
-        return self.transactionManager.transactions[-1]
+        return self.tm.transactions[-1]
