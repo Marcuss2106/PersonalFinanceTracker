@@ -8,13 +8,21 @@ class FileHandler:
         self.FIELDNAMES = ["category","type","description","amount","date"]
         self.TRANSACTIONFILE  = "transactions.csv"
         self.tm = transactionManager
-        with open(self.TRANSACTIONFILE) as transactionFile:
-            reader = csv.DictReader(transactionFile)
-            if reader:
-                for row in reader:
-                    row["amount"] = Decimal(row["amount"])
-                    row["date"] = datetime.datetime.fromisoformat(row["date"])
-                    self.tm.addTransactionToList(row)
+#        with open(self.TRANSACTIONFILE) as transactionFile:
+#            reader = csv.DictReader(transactionFile)
+#            if reader:
+#                for row in reader:
+#                    row["amount"] = Decimal(row["amount"])
+#                    row["date"] = datetime.datetime.fromisoformat(row["date"])
+#                    self.tm.addTransactionToList(row)
+#### REMOVE WHEN NOT TESTING:
+        with open(self.TRANSACTIONFILE,'w', newline='') as transactionFile:
+            writer = csv.DictWriter(transactionFile, fieldnames=self.FIELDNAMES)
+            writer.writerow({"category": "category",
+                              "type": "type",
+                              "description": "description",
+                              "amount": "amount",
+                              "date": "date"})
 
     def writeTransaction(self, transaction):
         with open(self.TRANSACTIONFILE,'a', newline='') as transactionFile:

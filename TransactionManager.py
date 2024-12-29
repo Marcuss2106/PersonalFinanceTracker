@@ -29,4 +29,7 @@ class TransactionManager:
         else:
             self.transactions.append(vars(transaction))
 
+    def showExpenses(self):
+        ...
+
     
